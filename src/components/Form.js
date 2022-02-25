@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Form() {
-  const { setFilters } = useContext(PlanetsContext);
+  const { setFilters, filters } = useContext(PlanetsContext);
   const column = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const comparison = ['maior que', 'menor que', 'igual a'];
@@ -29,9 +29,11 @@ function Form() {
           data-testid="column-filter"
           onChange={ ({ target }) => setInputColumn(target.value) }
         >
-          { column.map((option) => (
-            <option key={ option }>{ option }</option>
-          )) }
+          { column.filter((eachColumn) => !filters.filterByNumericValues
+            .some((eachFilter) => eachColumn === eachFilter.column))
+            .map((option) => (
+              <option key={ option }>{ option }</option>
+            )) }
         </select>
       </label>
       <label htmlFor="comparison-select">
