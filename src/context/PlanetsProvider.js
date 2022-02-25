@@ -5,7 +5,9 @@ import fetchPlanets from '../services/FetchPlanets';
 
 function PlanetsProvider({ children }) {
   const [data, setData] = useState([]);
-  const [filters, setPlanetName] = useState({ filterByName: { name: '' } });
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [] });
 
   async function returnPlanets() {
     const planets = await fetchPlanets();
@@ -17,11 +19,12 @@ function PlanetsProvider({ children }) {
   }, []);
 
   function targetValueName({ target }) {
-    setPlanetName({ filterByName: { name: target.value } });
+    setFilters((prevFilters) => (
+      { ...prevFilters, filterByName: { name: target.value } }));
   }
 
   return (
-    <PlanetsContext.Provider value={ { data, targetValueName, filters } }>
+    <PlanetsContext.Provider value={ { data, targetValueName, filters, setFilters } }>
       {children}
     </PlanetsContext.Provider>
   );

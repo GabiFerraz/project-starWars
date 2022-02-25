@@ -4,17 +4,32 @@ import PlanetsContext from '../context/PlanetsContext';
 function Table() {
   const { data, filters } = useContext(PlanetsContext);
   const [filterPlanetsNames, setFilterPlanetsNames] = useState([]);
+  const isFiltersNumeric = (planet, filterByNumValue) => {
+    const { column, comparison, value } = filterByNumValue;
+    if (comparison === 'maior que') {
+      return Number(planet[column]) > Number(value);
+    }
+    if (comparison === 'menor que') {
+      return Number(planet[column]) < Number(value);
+    }
+    if (comparison === 'igual a') {
+      return Number(planet[column]) === Number(value);
+    }
+  };
 
+  // estudar useCallback: avançado do hooks
+  // como não sei esse useCallback tive que comentar a função e passar o que tava dentro dessa função no useEffect pq ele pedia uma dependência
   // function returnNamesPlanets() {
   //   const filterNames = data.filter((planet) => (
   //     planet.name.includes(filters.filterByName.name)));
   //   setFilterPlanetsNames(filterNames);
   // }
-  // estudar useCallback: avançado do hooks
 
   useEffect(() => {
     const filterNames = data.filter((planet) => (
-      planet.name.includes(filters.filterByName.name)));
+      planet.name.includes(filters.filterByName.name)
+        && filters.filterByNumericValues
+          .every((eachFilter) => isFiltersNumeric(planet, eachFilter))));
     setFilterPlanetsNames(filterNames);
   }, [data, filters]);
 
