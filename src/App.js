@@ -4,6 +4,7 @@ import Table from './components/Table';
 import PlanetsProvider from './context/PlanetsProvider';
 import Input from './components/Input';
 import Form from './components/Form';
+import FiltersContainer from './components/FiltersContainer';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <PlanetsProvider>
         <Input />
         <Form />
+        <FiltersContainer />
         <Table />
       </PlanetsProvider>
     </>
