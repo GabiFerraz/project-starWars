@@ -8,15 +8,12 @@ import FiltersContainer from './components/FiltersContainer';
 
 function App() {
   return (
-    <>
-      <h1>StarWars Planets</h1>
-      <PlanetsProvider>
-        <Input />
-        <Form />
-        <FiltersContainer />
-        <Table />
-      </PlanetsProvider>
-    </>
+    <PlanetsProvider>
+      <Input />
+      <Form />
+      <FiltersContainer />
+      <Table />
+    </PlanetsProvider>
   );
 }
 

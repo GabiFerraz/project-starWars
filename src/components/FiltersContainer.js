@@ -17,11 +17,12 @@ function FiltersContainer() {
   }
 
   return (
-    <section>
+    <section className="section-filters">
       { filters.filterByNumericValues.map((eachFilter) => (
         <p key={ eachFilter.column } data-testid="filter">
           { `${eachFilter.column} ${eachFilter.comparison} ${eachFilter.value}` }
           <button
+            className="buttonRemove"
             type="button"
             onClick={ () => removeFilter(eachFilter.column) }
           >
@@ -30,6 +31,7 @@ function FiltersContainer() {
         </p>
       )) }
       <button
+        className="removeAllFilters"
         type="button"
         data-testid="button-remove-filters"
         onClick={ removeAllFilters }
